@@ -11,7 +11,7 @@
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <title>Avance de Obra — Parques Fase 1</title>
-  <!-- build:1777441684 -->
+  <!-- build:1777587382 -->
   <style>
     :root {
       --azul: #1a5f9e;
@@ -266,11 +266,28 @@ const BCOLOR={metro:"#378ADD",carollo:"#BA7517",cuadras:"#639922",chilibulo:"#99
 
 const SHEETS_URL='https://script.google.com/macros/s/AKfycbx6UrYYU7jcB-lcgZmFMSlxRwlpsVZM7tS_JHqj0yPcmYlL8f-5V45KoTILt3W0we3tDQ/exec';
 
+// Cargar registros de localStorage
 let registros=JSON.parse(localStorage.getItem('avance_registros')||'[]');
+// Recuperar fotos de sessionStorage (solo si la sesión sigue activa)
+try{
+  const fotosSession=JSON.parse(sessionStorage.getItem('avance_fotos')||'{}');
+  registros=registros.map(r=>{
+    if(fotosSession[r.id]) return {...r,fotos:fotosSession[r.id]};
+    return r;
+  });
+}catch(e){}
 let fotosActuales=[];
 let tabActual='registro';
 
-function guardarStorage(){ localStorage.setItem('avance_registros',JSON.stringify(registros)); }
+function guardarStorage(){
+  // Guardamos en localStorage SIN las fotos (para no llenar memoria)
+  const sinFotos=registros.map(r=>({...r,fotos:[]}));
+  localStorage.setItem('avance_registros',JSON.stringify(sinFotos));
+  // Las fotos se guardan en sessionStorage (se borran al cerrar el app)
+  const conFotos={};
+  registros.forEach(r=>{ if(r.fotos&&r.fotos.length>0) conFotos[r.id]=r.fotos; });
+  try{ sessionStorage.setItem('avance_fotos',JSON.stringify(conFotos)); }catch(e){}
+}
 
 function enviarASheets(registro){
   try {
@@ -482,10 +499,11 @@ function guardar(){
   }
   err.style.display='none';
   const r=RUBROS[parque][idx];
-  const nuevoReg={id:Date.now(),residente:res,fecha,parque,rubroIdx:parseInt(idx),rubro:r.desc,unidad:r.unidad,cantContratada:r.cant,cantidad:cant,obs:document.getElementById('inp-obs').value,fotos:[...fotosActuales]};
+  const fotasActualesCopy=[...fotosActuales];
+  const nuevoReg={id:Date.now(),residente:res,fecha,parque,rubroIdx:parseInt(idx),rubro:r.desc,unidad:r.unidad,cantContratada:r.cant,cantidad:cant,obs:document.getElementById('inp-obs').value,fotos:fotasActualesCopy,cantFotos:fotasActualesCopy.length};
   registros.push(nuevoReg);
-  guardarStorage();
-  enviarASheets(nuevoReg);
+  guardarStorage(); // guarda texto en localStorage, fotos en sessionStorage
+  enviarASheets({...nuevoReg,fotos:fotasActualesCopy});
   renderRegistro();
   const ok=document.getElementById('alert-ok');
   ok.style.display='block';
@@ -527,7 +545,8 @@ function renderHistorial(){
         <div class="reg-rubro">${r.rubro}</div>
         <div class="reg-cant">${r.cantidad.toFixed(2)} ${r.unidad} ejecutados</div>
         ${r.obs?`<div class="reg-obs">${r.obs}</div>`:''}
-        ${r.fotos&&r.fotos.length?`<div class="reg-fotos">${r.fotos.map(f=>`<img src="${f}" onclick="abrirLightbox('${f}')">`).join('')}</div>`:''}
+        ${r.fotos&&r.fotos.length>0?`<div class="reg-fotos">${r.fotos.map(f=>`<img src="${f}" onclick="abrirLightbox('${f}')">`).join('')}</div>`:
+          (r.cantFotos>0?`<div style="font-size:11px;color:#999;margin-top:4px">📷 ${r.cantFotos} foto(s) — reabrir app para ver</div>`:'')}
       </div>`).join('')}
     <div style="height:20px"></div>
   `;
