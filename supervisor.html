@@ -9,49 +9,41 @@
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f4f8;color:#1a1a1a}
-    .topbar{background:#1a5f9e;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
-    .topbar-left h1{color:#fff;font-size:18px;font-weight:600}
+    .topbar{background:#1a5f9e;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    .topbar-left{display:flex;align-items:center;gap:14px}
+    .topbar-left img{height:36px;background:#fff;border-radius:6px;padding:3px 8px}
+    .topbar-left h1{color:#fff;font-size:17px;font-weight:600}
     .topbar-left p{color:#b5d4f4;font-size:12px;margin-top:2px}
     .topbar-right{display:flex;align-items:center;gap:10px}
     .last-update{color:#b5d4f4;font-size:11px}
     .btn-refresh{background:rgba(255,255,255,0.2);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;font-weight:500}
     .btn-refresh:hover{background:rgba(255,255,255,0.3)}
-    .content{padding:20px;max-width:1400px;margin:0 auto}
+    .content{padding:16px 20px;max-width:1400px;margin:0 auto}
     .loading{text-align:center;padding:60px;color:#666;font-size:14px}
     .spinner{width:36px;height:36px;border:3px solid #e0e0e0;border-top-color:#1a5f9e;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px}
     @keyframes spin{to{transform:rotate(360deg)}}
-
-    /* MÉTRICAS GLOBALES */
-    .metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px}
+    .metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px}
     .metric{background:#fff;border-radius:12px;border:1px solid #e0e0e0;padding:14px 16px}
     .metric-label{font-size:11px;color:#666;font-weight:500;text-transform:uppercase;letter-spacing:0.4px}
     .metric-val{font-size:24px;font-weight:700;color:#1a5f9e;margin:4px 0 2px}
     .metric-sub{font-size:11px;color:#999}
-
-    /* TABS */
-    .tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+    .tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
     .tab{padding:8px 16px;border:1px solid #e0e0e0;border-radius:8px;background:#fff;color:#666;font-size:13px;cursor:pointer;font-weight:500}
     .tab.active{background:#1a5f9e;color:#fff;border-color:#1a5f9e}
-
-    /* CARDS */
-    .card{background:#fff;border-radius:12px;border:1px solid #e0e0e0;padding:18px;margin-bottom:16px}
-    .card-title{font-size:13px;font-weight:600;color:#444;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-
-    /* RESUMEN PARQUES */
-    .parques-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:20px}
-    .parque-card{background:#fff;border-radius:12px;border:1px solid #e0e0e0;padding:16px;cursor:pointer;transition:box-shadow 0.2s}
+    .card{background:#fff;border-radius:12px;border:1px solid #e0e0e0;padding:18px;margin-bottom:14px}
+    .card-title{font-size:12px;font-weight:600;color:#444;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:14px}
+    .parques-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:16px}
+    .parque-card{background:#fff;border-radius:12px;border:1px solid #e0e0e0;padding:14px;cursor:pointer;transition:box-shadow 0.2s}
     .parque-card:hover{box-shadow:0 4px 12px rgba(0,0,0,0.1)}
     .parque-card.active{border-color:#1a5f9e;box-shadow:0 0 0 2px rgba(26,95,158,0.2)}
-    .parque-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+    .parque-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
     .parque-name{font-size:14px;font-weight:600}
     .parque-pct{font-size:20px;font-weight:700}
-    .parque-bar-bg{background:#f0f4f8;border-radius:4px;height:8px;margin-bottom:8px}
-    .parque-bar-fill{height:8px;border-radius:4px}
+    .bar-bg{background:#f0f4f8;border-radius:4px;height:8px;margin-bottom:8px}
+    .bar-fill{height:8px;border-radius:4px}
     .parque-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px}
     .parque-stat{font-size:10px;color:#666;text-align:center}
     .parque-stat strong{display:block;font-size:12px;color:#1a1a1a;font-weight:600}
-
-    /* TABLA DETALLE */
     .table-wrap{overflow-x:auto}
     table{width:100%;border-collapse:collapse;font-size:12px}
     thead tr{background:#f8f9fa}
@@ -61,53 +53,38 @@
     tr:hover td{background:#fafafa}
     .td-right{text-align:right}
     .td-center{text-align:center}
-
-    /* BADGES Y BARRAS */
     .badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:500}
-    .badge-metro{background:#E6F1FB;color:#0C447C}
-    .badge-carollo{background:#FAEEDA;color:#633806}
-    .badge-cuadras{background:#EAF3DE;color:#27500A}
-    .badge-chilibulo{background:#FAECE7;color:#712B13}
+    .b-metro{background:#E6F1FB;color:#0C447C}
+    .b-carollo{background:#FAEEDA;color:#633806}
+    .b-cuadras{background:#EAF3DE;color:#27500A}
+    .b-chilibulo{background:#FAECE7;color:#712B13}
+    .b-transfer{background:#FFF3CD;color:#92400E}
+    .b-contrato{background:#EAF3DE;color:#27500A}
     .mini-bar-bg{background:#f0f4f8;border-radius:3px;height:6px;width:80px;display:inline-block;vertical-align:middle}
     .mini-bar-fill{height:6px;border-radius:3px}
-    .pct-val{font-weight:600;font-size:12px}
-
-    /* FOTOS */
-    .fotos-grid{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-    .foto-thumb{width:48px;height:40px;object-fit:cover;border-radius:4px;border:1px solid #e0e0e0;cursor:pointer}
-    .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:1000;align-items:center;justify-content:center}
-    .lightbox.open{display:flex}
-    .lightbox img{max-width:95vw;max-height:90vh;object-fit:contain;border-radius:8px}
-    .lightbox-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer}
-
-    /* GRAFICOS */
-    .charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
-    @media(max-width:700px){.charts-grid{grid-template-columns:1fr}.parques-grid{grid-template-columns:1fr}}
-    .chart-container{position:relative;height:260px}
-
-    /* REGISTROS */
-    .reg-item{border:1px solid #e0e0e0;border-radius:8px;padding:12px;margin-bottom:8px}
-    .reg-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;flex-wrap:wrap;gap:6px}
-    .reg-meta{font-size:11px;color:#999;margin-top:2px}
-    .reg-rubro{font-size:13px;color:#1a1a1a;margin:4px 0 2px}
-    .reg-cant{font-size:13px;font-weight:600;color:#1a5f9e}
-    .reg-obs{font-size:11px;color:#666;font-style:italic;margin-top:4px}
-
     .estado{padding:3px 8px;border-radius:12px;font-size:10px;font-weight:600}
     .estado-completo{background:#EAF3DE;color:#27500A}
     .estado-avanzado{background:#E6F1FB;color:#0C447C}
     .estado-progreso{background:#FFF9C4;color:#7D6608}
     .estado-inicio{background:#FAEEDA;color:#633806}
     .estado-sin{background:#f0f0f0;color:#999}
-
-    .error-msg{background:#FCEBEB;color:#A32D2D;border-radius:8px;padding:14px;font-size:13px;text-align:center;margin:20px 0}
+    .charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+    @media(max-width:700px){.charts-grid{grid-template-columns:1fr}.parques-grid{grid-template-columns:1fr}}
+    .chart-container{position:relative;height:240px}
+    .tr-row{background:#FFFBEB;border-left:3px solid #F59E0B}
+    .tr-row:hover td{background:#FFF8E1}
+    .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:1000;align-items:center;justify-content:center}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:95vw;max-height:90vh;border-radius:8px;object-fit:contain}
+    .lightbox-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer}
+    .empty{text-align:center;padding:32px;color:#999;font-size:13px}
+    .transfer-summary{background:#FFF8E1;border:1px solid #F59E0B;border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:12px;color:#92400E}
   </style>
 </head>
 <body>
-
 <div class="topbar">
-  <div class="topbar-left" style="display:flex;align-items:center;gap:14px">
-    <img src="data:image/png;base64,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" alt="SATHIRI" style="height:36px;background:#fff;border-radius:6px;padding:3px 8px">
+  <div class="topbar-left">
+    <img src="data:image/png;base64,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" alt="SATHIRI">
     <div>
       <h1>Panel de Supervisor</h1>
       <p>Mantenimiento de Parques — Fase 1</p>
@@ -121,10 +98,7 @@
 
 <div class="content">
   <div id="main-content">
-    <div class="loading">
-      <div class="spinner"></div>
-      Cargando datos desde Google Sheets...
-    </div>
+    <div class="loading"><div class="spinner"></div>Cargando datos...</div>
   </div>
 </div>
 
@@ -135,7 +109,6 @@
 
 <script>
 const SHEETS_URL='https://script.google.com/macros/s/AKfycbx6UrYYU7jcB-lcgZmFMSlxRwlpsVZM7tS_JHqj0yPcmYlL8f-5V45KoTILt3W0we3tDQ/exec';
-
 const PRESUPUESTO={
   metro:{nombre:'Metro Sur',color:'#378ADD',bg:'#E6F1FB',txt:'#0C447C',total:45079.57,rubros:[
     {desc:'Reposición de cerca pronto modular',unidad:'m²',cant:181.31,vu:78.00},
@@ -202,14 +175,17 @@ const PRESUPUESTO={
   ]}
 };
 
-const $ = id => document.getElementById(id);
+const PBADGE={metro:'b-metro',carollo:'b-carollo',cuadras:'b-cuadras',chilibulo:'b-chilibulo'};
+const BCOLOR={metro:'#378ADD',carollo:'#BA7517',cuadras:'#639922',chilibulo:'#993C1D'};
+
 let registrosData=[];
 let tabActual='resumen';
 let parqueActivo='';
 let charts={};
 
-function fmt(n){return '$'+parseFloat(n).toLocaleString('es-EC',{minimumFractionDigits:2,maximumFractionDigits:2});}
-function fmtN(n){return parseFloat(n).toLocaleString('es-EC',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function fmt(n){return '$'+parseFloat(n||0).toLocaleString('es-EC',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function fmtN(n){return parseFloat(n||0).toLocaleString('es-EC',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function norm(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').trim();}
 function pctColor(p){return p>=100?'#639922':p>=60?'#1a5f9e':p>=30?'#BA7517':'#E24B4A';}
 function estadoBadge(p){
   if(p>=100)return'<span class="estado estado-completo">Completo</span>';
@@ -220,254 +196,185 @@ function estadoBadge(p){
 }
 
 function cargarDatos(){
-  $('last-update').textContent='Actualizando...';
-  const cbName='_supCb'+Date.now();
+  document.getElementById('last-update').textContent='Actualizando...';
+  const cbN='_supCb'+Date.now();
   const sc=document.createElement('script');
-  sc.src=SHEETS_URL+'?action=getData&cb='+cbName;
-  window[cbName]=function(data){
+  sc.src=SHEETS_URL+'?action=getData&cb='+cbN;
+  window[cbN]=function(data){
     try{document.head.removeChild(sc);}catch(e){}
-    delete window[cbName];
-    if(data&&data.rows){
-      registrosData=data.rows;
-      $('last-update').textContent='Actualizado: '+new Date().toLocaleTimeString('es-EC');
-      renderPanel();
-    } else {
-      usarDatosVacios();
-    }
+    delete window[cbN];
+    if(data&&data.rows){registrosData=data.rows;document.getElementById('last-update').textContent='Actualizado: '+new Date().toLocaleTimeString('es-EC');renderPanel();}
+    else usarDatosVacios();
   };
-  sc.onerror=function(){
-    try{document.head.removeChild(sc);}catch(e){}
-    delete window[cbName];
-    usarDatosVacios();
-  };
+  sc.onerror=function(){try{document.head.removeChild(sc);}catch(e){}delete window[cbN];usarDatosVacios();};
   document.head.appendChild(sc);
-  setTimeout(()=>{
-    if(window[cbName]){
-      try{document.head.removeChild(sc);}catch(e){}
-      delete window[cbName];
-      usarDatosVacios();
-    }
-  },8000);
+  setTimeout(()=>{if(window[cbN]){try{document.head.removeChild(sc);}catch(e){}delete window[cbN];usarDatosVacios();}},8000);
 }
 
 function usarDatosVacios(){
   registrosData=[];
-  $('last-update').textContent='Sin conexión — mostrando presupuesto';
+  document.getElementById('last-update').textContent='Sin conexión';
   renderPanel();
 }
 
-function normalizar(s){
-  return String(s||'').toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-    .replace(/\s+/g,' ').trim();
-}
+// ── CALCULAR AVANCE ──────────────────────────────
+// Vista contrato: suma por rubro del parque ORIGEN (donde estaba contratado)
+// Vista campo: suma por parque de EJECUCIÓN física
+function calcularAvances(){
+  // contrato[parqueOrigen][rubroDesc] = {ejecutado, transferidoAotro}
+  const contrato={};
+  // campo[parqueEjecucion][rubroDesc] = {ejecutado, esTransferido, parqueOrigen}
+  const campo={};
+  // transferencias: lista de registros con cambio
+  const transferencias=[];
 
-function calcularAvance(){
-  const avance={};
   Object.keys(PRESUPUESTO).forEach(pk=>{
-    avance[pk]={};
-    PRESUPUESTO[pk].rubros.forEach((r,i)=>{
-      avance[pk][i]={ejecutado:0,registros:[]};
+    contrato[pk]={};
+    campo[pk]={};
+    PRESUPUESTO[pk].rubros.forEach(r=>{
+      contrato[pk][r.desc]={ejecutado:0,transferido:0};
+      campo[pk][r.desc]={ejecutado:0,esTransferido:false,transferidos:0};
     });
   });
+
   registrosData.forEach(reg=>{
-    const pk=Object.keys(PRESUPUESTO).find(k=>
-      normalizar(PRESUPUESTO[k].nombre)===normalizar(reg.parque)
-    );
-    if(!pk)return;
-    const ri=PRESUPUESTO[pk].rubros.findIndex(r=>
-      normalizar(r.desc)===normalizar(reg.rubro)
-    );
-    if(ri<0)return;
-    avance[pk][ri].ejecutado+=parseFloat(reg.cantidad)||0;
-    avance[pk][ri].registros.push(reg);
+    const pkEjec=Object.keys(PRESUPUESTO).find(k=>norm(PRESUPUESTO[k].nombre)===norm(reg.parque));
+    const pkOrigen=reg.parqueOrigen?Object.keys(PRESUPUESTO).find(k=>norm(PRESUPUESTO[k].nombre)===norm(reg.parqueOrigen)):pkEjec;
+    const cant=parseFloat(reg.cantidad)||0;
+    const esTransferido=reg.esTransferido==='1'||reg.esTransferido===true||reg.esTransferido==='true';
+
+    // Vista contrato: se acredita al parque origen
+    const pkContr=esTransferido&&pkOrigen?pkOrigen:pkEjec;
+    if(pkContr&&contrato[pkContr]&&contrato[pkContr][reg.rubro]!==undefined){
+      contrato[pkContr][reg.rubro].ejecutado+=cant;
+      if(esTransferido)contrato[pkContr][reg.rubro].transferido+=cant;
+    } else if(pkContr&&contrato[pkContr]){
+      if(!contrato[pkContr][reg.rubro])contrato[pkContr][reg.rubro]={ejecutado:0,transferido:0};
+      contrato[pkContr][reg.rubro].ejecutado+=cant;
+    }
+
+    // Vista campo: se acredita al parque de ejecución
+    if(pkEjec){
+      if(!campo[pkEjec][reg.rubro])campo[pkEjec][reg.rubro]={ejecutado:0,esTransferido:false,transferidos:0};
+      campo[pkEjec][reg.rubro].ejecutado+=cant;
+      if(esTransferido)campo[pkEjec][reg.rubro].transferidos+=cant;
+    }
+
+    if(esTransferido){
+      transferencias.push({
+        fecha:reg.fecha,residente:reg.residente,
+        rubro:reg.rubro,unidad:reg.unidad||'',
+        pkOrigen:pkContr,parqueOrigen:PRESUPUESTO[pkContr]?PRESUPUESTO[pkContr].nombre:reg.parqueOrigen,
+        pkEjec,parqueEjec:pkEjec?PRESUPUESTO[pkEjec].nombre:reg.parque,
+        cantidad:cant,motivo:reg.motivo||''
+      });
+    }
   });
-  return avance;
+
+  return {contrato,campo,transferencias};
 }
 
 function renderPanel(){
-  const avance=calcularAvance();
-  const totalPresup=Object.values(PRESUPUESTO).reduce((s,p)=>s+p.total,0);
-  let totalEjec=0;
-  let totalReg=registrosData.length;
-  let rubrosActivos=0;
+  const {contrato,campo,transferencias}=calcularAvances();
 
+  // Métricas globales usando vista contrato
+  let totalEjec=0;
+  const totalPresup=Object.values(PRESUPUESTO).reduce((s,p)=>s+p.total,0);
   Object.keys(PRESUPUESTO).forEach(pk=>{
-    PRESUPUESTO[pk].rubros.forEach((r,i)=>{
-      const ej=avance[pk][i].ejecutado;
-      if(ej>0){rubrosActivos++;totalEjec+=ej*r.vu;}
+    PRESUPUESTO[pk].rubros.forEach(r=>{
+      const ej=(contrato[pk][r.desc]||{}).ejecutado||0;
+      totalEjec+=ej*r.vu;
     });
   });
-
   const pctGlobal=totalPresup>0?(totalEjec/totalPresup*100):0;
+  const nTransfer=transferencias.length;
 
   let html=`
     <div class="metrics-grid">
-      <div class="metric">
-        <div class="metric-label">Presupuesto total</div>
-        <div class="metric-val">${fmt(totalPresup)}</div>
-        <div class="metric-sub">4 parques</div>
-      </div>
-      <div class="metric">
-        <div class="metric-label">Valor ejecutado</div>
-        <div class="metric-val" style="color:#639922">${fmt(totalEjec)}</div>
-        <div class="metric-sub">${pctGlobal.toFixed(1)}% del presupuesto</div>
-      </div>
-      <div class="metric">
-        <div class="metric-label">Por ejecutar</div>
-        <div class="metric-val" style="color:#BA7517">${fmt(totalPresup-totalEjec)}</div>
-        <div class="metric-sub">saldo restante</div>
-      </div>
-      <div class="metric">
-        <div class="metric-label">Registros</div>
-        <div class="metric-val">${totalReg}</div>
-        <div class="metric-sub">${rubrosActivos} rubros con avance</div>
-      </div>
+      <div class="metric"><div class="metric-label">Presupuesto total</div><div class="metric-val">${fmt(totalPresup)}</div><div class="metric-sub">4 parques</div></div>
+      <div class="metric"><div class="metric-label">Valor ejecutado</div><div class="metric-val" style="color:#639922">${fmt(totalEjec)}</div><div class="metric-sub">${pctGlobal.toFixed(1)}% del presupuesto</div></div>
+      <div class="metric"><div class="metric-label">Por ejecutar</div><div class="metric-val" style="color:#BA7517">${fmt(totalPresup-totalEjec)}</div><div class="metric-sub">saldo restante</div></div>
+      <div class="metric"><div class="metric-label">Registros</div><div class="metric-val">${registrosData.length}</div><div class="metric-sub">${nTransfer} transferencia(s)</div></div>
     </div>
-
     <div class="tabs">
       <div class="tab ${tabActual==='resumen'?'active':''}" onclick="setTab('resumen')">Resumen general</div>
-      <div class="tab ${tabActual==='detalle'?'active':''}" onclick="setTab('detalle')">Detalle por parque</div>
-      <div class="tab ${tabActual==='registros'?'active':''}" onclick="setTab('registros')">Registros y fotos</div>
+      <div class="tab ${tabActual==='contrato'?'active':''}" onclick="setTab('contrato')">Vista contrato</div>
+      <div class="tab ${tabActual==='campo'?'active':''}" onclick="setTab('campo')">Vista campo</div>
+      <div class="tab ${tabActual==='transferencias'?'active':''}" onclick="setTab('transferencias')">Transferencias ${nTransfer>0?`<span style="background:#F59E0B;color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;margin-left:4px">${nTransfer}</span>`:''}</div>
+      <div class="tab ${tabActual==='registros'?'active':''}" onclick="setTab('registros')">Registros</div>
     </div>
   `;
 
-  if(tabActual==='resumen'){
-    html+=renderResumen(avance);
-  } else if(tabActual==='detalle'){
-    html+=renderDetalle(avance);
-  } else {
-    html+=renderRegistros();
-  }
+  if(tabActual==='resumen') html+=renderResumen(contrato);
+  else if(tabActual==='contrato') html+=renderVistaContrato(contrato);
+  else if(tabActual==='campo') html+=renderVistaCampo(campo);
+  else if(tabActual==='transferencias') html+=renderTransferencias(transferencias);
+  else html+=renderRegistros();
 
-  $('main-content').innerHTML=html;
-
-  if(tabActual==='resumen') renderCharts(avance);
+  document.getElementById('main-content').innerHTML=html;
+  if(tabActual==='resumen')renderCharts(contrato);
 }
 
-function renderResumen(avance){
+function renderResumen(contrato){
   let html='<div class="parques-grid">';
   Object.keys(PRESUPUESTO).forEach(pk=>{
     const p=PRESUPUESTO[pk];
     let ejec=0;
-    p.rubros.forEach((r,i)=>{ ejec+=avance[pk][i].ejecutado*r.vu; });
+    p.rubros.forEach(r=>{ejec+=((contrato[pk][r.desc]||{}).ejecutado||0)*r.vu;});
     const pct=p.total>0?(ejec/p.total*100):0;
     const col=pctColor(pct);
-    html+=`
-      <div class="parque-card ${parqueActivo===pk?'active':''}" onclick="verDetalle('${pk}')">
-        <div class="parque-header">
-          <span class="parque-name" style="color:${p.color}">${p.nombre}</span>
-          <span class="parque-pct" style="color:${col}">${pct.toFixed(1)}%</span>
-        </div>
-        <div class="parque-bar-bg">
-          <div class="parque-bar-fill" style="width:${Math.min(pct,100).toFixed(1)}%;background:${col}"></div>
-        </div>
-        <div class="parque-stats">
-          <div class="parque-stat"><strong>${fmt(p.total)}</strong>Presupuesto</div>
-          <div class="parque-stat"><strong style="color:${col}">${fmt(ejec)}</strong>Ejecutado</div>
-          <div class="parque-stat"><strong style="color:#BA7517">${fmt(p.total-ejec)}</strong>Por ejecutar</div>
-        </div>
-      </div>`;
+    html+=`<div class="parque-card ${parqueActivo===pk?'active':''}" onclick="verContrato('${pk}')">
+      <div class="parque-header"><span class="parque-name" style="color:${p.color}">${p.nombre}</span><span class="parque-pct" style="color:${col}">${pct.toFixed(1)}%</span></div>
+      <div class="bar-bg"><div class="bar-fill" style="width:${Math.min(pct,100).toFixed(1)}%;background:${col}"></div></div>
+      <div class="parque-stats">
+        <div class="parque-stat"><strong>${fmt(p.total)}</strong>Presupuesto</div>
+        <div class="parque-stat"><strong style="color:${col}">${fmt(ejec)}</strong>Ejecutado</div>
+        <div class="parque-stat"><strong style="color:#BA7517">${fmt(p.total-ejec)}</strong>Saldo</div>
+      </div>
+    </div>`;
   });
   html+='</div>';
-
   html+=`<div class="charts-grid">
-    <div class="card">
-      <div class="card-title">Avance vs Presupuesto por parque</div>
-      <div class="chart-container"><canvas id="chart-barras"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="card-title">Distribución del valor ejecutado</div>
-      <div class="chart-container"><canvas id="chart-dona"></canvas></div>
-    </div>
+    <div class="card"><div class="card-title">Presupuesto vs Ejecutado por parque</div><div class="chart-container"><canvas id="chart-barras"></canvas></div></div>
+    <div class="card"><div class="card-title">Distribución del valor ejecutado</div><div class="chart-container"><canvas id="chart-dona"></canvas></div></div>
   </div>`;
   return html;
 }
 
-function renderCharts(avance){
-  const labels=[];
-  const presups=[];
-  const ejecs=[];
-  const colors=[];
-  const ejecVals=[];
-
+function renderCharts(contrato){
+  const labels=[],presups=[],ejecs=[],colors=[];
   Object.keys(PRESUPUESTO).forEach(pk=>{
     const p=PRESUPUESTO[pk];
     let ejec=0;
-    p.rubros.forEach((r,i)=>{ ejec+=avance[pk][i].ejecutado*r.vu; });
-    labels.push(p.nombre);
-    presups.push(p.total);
-    ejecs.push(ejec);
-    colors.push(p.color);
-    ejecVals.push(ejec);
+    p.rubros.forEach(r=>{ejec+=((contrato[pk][r.desc]||{}).ejecutado||0)*r.vu;});
+    labels.push(p.nombre);presups.push(p.total);ejecs.push(ejec);colors.push(p.color);
   });
-
-  if(charts.barras) charts.barras.destroy();
-  if(charts.dona) charts.dona.destroy();
-
-  const ctxB=document.getElementById('chart-barras');
-  if(ctxB){
-    charts.barras=new Chart(ctxB,{
-      type:'bar',
-      data:{
-        labels,
-        datasets:[
-          {label:'Presupuesto',data:presups,backgroundColor:'rgba(26,95,158,0.15)',borderColor:'rgba(26,95,158,0.5)',borderWidth:1},
-          {label:'Ejecutado',data:ejecs,backgroundColor:colors.map(c=>c+'CC'),borderColor:colors,borderWidth:1}
-        ]
-      },
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{y:{ticks:{callback:v=>'$'+v.toLocaleString()}}}}
-    });
-  }
-
-  const ctxD=document.getElementById('chart-dona');
-  if(ctxD){
-    charts.dona=new Chart(ctxD,{
-      type:'doughnut',
-      data:{
-        labels,
-        datasets:[{data:ejecVals,backgroundColor:colors,borderWidth:2}]
-      },
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:ctx=>' '+ctx.label+': '+fmt(ctx.raw)}}}}
-    });
-  }
+  if(charts.barras)charts.barras.destroy();
+  if(charts.dona)charts.dona.destroy();
+  const cb=document.getElementById('chart-barras');
+  if(cb)charts.barras=new Chart(cb,{type:'bar',data:{labels,datasets:[{label:'Presupuesto',data:presups,backgroundColor:'rgba(26,95,158,0.15)',borderColor:'rgba(26,95,158,0.5)',borderWidth:1},{label:'Ejecutado',data:ejecs,backgroundColor:colors.map(c=>c+'CC'),borderColor:colors,borderWidth:1}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{y:{ticks:{callback:v=>'$'+v.toLocaleString()}}}})});
+  const cd=document.getElementById('chart-dona');
+  if(cd)charts.dona=new Chart(cd,{type:'doughnut',data:{labels,datasets:[{data:ejecs,backgroundColor:colors,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:ctx=>' '+ctx.label+': '+fmt(ctx.raw)}}}})});
 }
 
-function renderDetalle(avance){
+function renderVistaContrato(contrato){
   const pk=parqueActivo||'metro';
   const p=PRESUPUESTO[pk];
-  let html=`<div class="tabs" style="margin-bottom:12px">`;
-  Object.keys(PRESUPUESTO).forEach(k=>{
-    html+=`<div class="tab ${pk===k?'active':''}" onclick="cambiarParque('${k}')">${PRESUPUESTO[k].nombre}</div>`;
-  });
+  let html=`<div class="card" style="background:#E6F1FB;border-color:#1a5f9e;margin-bottom:10px;padding:10px 14px">
+    <p style="font-size:12px;color:#0C447C"><strong>Vista Contrato:</strong> Muestra el avance acumulado de cada rubro según el parque donde fue contratado, independientemente de dónde se ejecutó físicamente. Esta es la vista para planillas.</p>
+  </div>`;
+  html+='<div class="tabs" style="margin-bottom:12px">';
+  Object.keys(PRESUPUESTO).forEach(k=>{html+=`<div class="tab ${pk===k?'active':''}" onclick="cambiarParque('${k}','contrato')">${PRESUPUESTO[k].nombre}</div>`;});
   html+='</div>';
-
-  html+=`<div class="card">
-    <div class="card-title" style="color:${p.color}">● ${p.nombre} — Detalle de rubros</div>
-    <div class="table-wrap">
-    <table>
-      <thead><tr>
-        <th>#</th><th>Rubro</th><th>Und.</th>
-        <th class="td-right">Cant. contratada</th>
-        <th class="td-right">V. unitario</th>
-        <th class="td-right">Presupuesto</th>
-        <th class="td-right">Cant. ejecutada</th>
-        <th class="td-right">Valor ejecutado</th>
-        <th class="td-right">Saldo</th>
-        <th class="td-center">% Avance</th>
-        <th class="td-center">Estado</th>
-      </tr></thead>
-      <tbody>`;
-
-  let totPresup=0,totEjec=0;
+  html+=`<div class="card"><div class="card-title" style="color:${p.color}">● ${p.nombre} — Vista Contrato</div><div class="table-wrap"><table>
+    <thead><tr><th>#</th><th>Rubro</th><th>Und.</th><th class="td-right">Cant. contratada</th><th class="td-right">V. unitario</th><th class="td-right">Presupuesto</th><th class="td-right">Cant. ejecutada</th><th class="td-right">Incl. transferido</th><th class="td-right">Valor ejecutado</th><th class="td-right">Saldo</th><th class="td-center">% Avance</th><th class="td-center">Estado</th></tr></thead><tbody>`;
+  let totP=0,totE=0;
   p.rubros.forEach((r,i)=>{
-    const ej=avance[pk][i].ejecutado;
-    const presup=r.cant*r.vu;
-    const ejVal=ej*r.vu;
-    const saldo=presup-ejVal;
-    const pct=r.cant>0?(ej/r.cant*100):0;
-    const col=pctColor(pct);
-    totPresup+=presup; totEjec+=ejVal;
+    const d=contrato[pk][r.desc]||{ejecutado:0,transferido:0};
+    const ej=d.ejecutado;const tr=d.transferido;
+    const presup=r.cant*r.vu;const ejVal=ej*r.vu;
+    const saldo=presup-ejVal;const pct=r.cant>0?(ej/r.cant*100):0;
+    const col=pctColor(pct);totP+=presup;totE+=ejVal;
     html+=`<tr>
       <td style="color:#999;font-size:11px">${i+1}</td>
       <td style="font-size:11px">${r.desc}</td>
@@ -476,109 +383,152 @@ function renderDetalle(avance){
       <td class="td-right">${fmt(r.vu)}</td>
       <td class="td-right" style="font-weight:500">${fmt(presup)}</td>
       <td class="td-right" style="color:#1a5f9e;font-weight:600">${fmtN(ej)}</td>
+      <td class="td-right">${tr>0?`<span style="color:#92400E;font-size:11px">↔ ${fmtN(tr)}</span>`:'—'}</td>
       <td class="td-right" style="color:${col};font-weight:600">${fmt(ejVal)}</td>
       <td class="td-right" style="color:#BA7517">${fmt(saldo)}</td>
-      <td class="td-center">
-        <div style="display:flex;align-items:center;gap:4px;justify-content:center">
-          <div class="mini-bar-bg"><div class="mini-bar-fill" style="width:${Math.min(pct,100).toFixed(1)}%;background:${col}"></div></div>
-          <span class="pct-val" style="color:${col}">${pct.toFixed(1)}%</span>
-        </div>
-      </td>
+      <td class="td-center"><div style="display:flex;align-items:center;gap:4px;justify-content:center"><div class="mini-bar-bg"><div class="mini-bar-fill" style="width:${Math.min(pct,100).toFixed(1)}%;background:${col}"></div></div><span style="color:${col};font-weight:600;font-size:12px">${pct.toFixed(1)}%</span></div></td>
       <td class="td-center">${estadoBadge(pct)}</td>
     </tr>`;
   });
-
-  const totPct=totPresup>0?(totEjec/totPresup*100):0;
+  const totPct=totP>0?(totE/totP*100):0;
   html+=`<tr style="background:#f8f9fa;font-weight:600">
     <td colspan="5" style="text-align:right;padding:10px 12px">TOTAL ${p.nombre.toUpperCase()}</td>
-    <td class="td-right">${fmt(totPresup)}</td>
-    <td class="td-right"></td>
-    <td class="td-right" style="color:${pctColor(totPct)}">${fmt(totEjec)}</td>
-    <td class="td-right" style="color:#BA7517">${fmt(totPresup-totEjec)}</td>
-    <td class="td-center" style="color:${pctColor(totPct)}">${totPct.toFixed(1)}%</td>
-    <td></td>
+    <td class="td-right">${fmt(totP)}</td><td></td><td></td>
+    <td class="td-right" style="color:${pctColor(totPct)}">${fmt(totE)}</td>
+    <td class="td-right" style="color:#BA7517">${fmt(totP-totE)}</td>
+    <td class="td-center" style="color:${pctColor(totPct)}">${totPct.toFixed(1)}%</td><td></td>
   </tr>`;
+  html+='</tbody></table></div></div>';
+  return html;
+}
+
+function renderVistaCampo(campo){
+  const pk=parqueActivo||'metro';
+  const p=PRESUPUESTO[pk];
+  let html=`<div class="card" style="background:#FFF8E1;border-color:#F59E0B;margin-bottom:10px;padding:10px 14px">
+    <p style="font-size:12px;color:#92400E"><strong>Vista Campo:</strong> Muestra lo que físicamente se ejecutó en cada parque. Los rubros propios aparecen normales y los rubros transferidos de otro parque aparecen con borde naranja ↔.</p>
+  </div>`;
+  html+='<div class="tabs" style="margin-bottom:12px">';
+  Object.keys(PRESUPUESTO).forEach(k=>{html+=`<div class="tab ${pk===k?'active':''}" onclick="cambiarParque('${k}','campo')">${PRESUPUESTO[k].nombre}</div>`;});
+  html+='</div>';
+
+  // Obtener todos los rubros ejecutados en este parque (propios + transferidos)
+  const rubrosEjec=campo[pk]||{};
+  const rubrosConDatos=Object.entries(rubrosEjec).filter(([desc,d])=>d.ejecutado>0);
+
+  html+=`<div class="card"><div class="card-title" style="color:${p.color}">● ${p.nombre} — Vista Campo (ejecución física)</div>`;
+  if(!rubrosConDatos.length){html+='<div class="empty">Sin registros en este parque.</div></div>';return html;}
+
+  html+=`<div class="table-wrap"><table>
+    <thead><tr><th>Tipo</th><th>Rubro</th><th>Und.</th><th class="td-right">Cant. ejecutada</th><th class="td-right">De éstos, transferidos</th><th class="td-right">Valor ejecutado</th><th class="td-center">% vs contrato</th></tr></thead><tbody>`;
+
+  // Primero rubros propios
+  p.rubros.forEach(r=>{
+    const d=rubrosEjec[r.desc];
+    if(!d||d.ejecutado===0)return;
+    const pct=r.cant>0?(d.ejecutado/r.cant*100):0;
+    const col=pctColor(pct);
+    html+=`<tr>
+      <td><span class="badge b-contrato">✓ Propio</span></td>
+      <td style="font-size:11px">${r.desc}</td>
+      <td class="td-center"><span style="background:#f0f4f8;padding:2px 6px;border-radius:4px;font-size:10px">${r.unidad}</span></td>
+      <td class="td-right" style="font-weight:600;color:#1a5f9e">${fmtN(d.ejecutado)}</td>
+      <td class="td-right">${d.transferidos>0?`<span style="color:#92400E">↔ ${fmtN(d.transferidos)}</span>`:'—'}</td>
+      <td class="td-right" style="color:${col};font-weight:600">${fmt(d.ejecutado*r.vu)}</td>
+      <td class="td-center"><span style="color:${col};font-weight:600">${pct.toFixed(1)}%</span></td>
+    </tr>`;
+  });
+
+  // Luego rubros transferidos de otros parques
+  rubrosConDatos.forEach(([desc,d])=>{
+    const esPropio=p.rubros.some(r=>r.desc===desc);
+    if(esPropio)return;
+    // Buscar el vu de otro parque
+    let vu=0;
+    Object.keys(PRESUPUESTO).forEach(pk2=>{
+      const r2=PRESUPUESTO[pk2].rubros.find(r=>r.desc===desc);
+      if(r2)vu=r2.vu;
+    });
+    html+=`<tr class="tr-row">
+      <td><span class="badge b-transfer">↔ Transferido</span></td>
+      <td style="font-size:11px">${desc}</td>
+      <td class="td-center"><span style="background:#FFF3CD;padding:2px 6px;border-radius:4px;font-size:10px">—</span></td>
+      <td class="td-right" style="font-weight:600;color:#92400E">${fmtN(d.ejecutado)}</td>
+      <td class="td-right">${fmtN(d.ejecutado)}</td>
+      <td class="td-right" style="color:#92400E;font-weight:600">${fmt(d.ejecutado*vu)}</td>
+      <td class="td-center"><span style="color:#92400E">Transferido</span></td>
+    </tr>`;
+  });
 
   html+='</tbody></table></div></div>';
   return html;
 }
 
-function renderRegistros(){
-  const filP=$('fil-parque')?$('fil-parque').value:'';
-  const filF=$('fil-fecha')?$('fil-fecha').value:'hoy';
-  const filFI=$('fil-fecha-ini')?$('fil-fecha-ini').value:'';
-  const filFF=$('fil-fecha-fin')?$('fil-fecha-fin').value:'';
-
-  const hoy=new Date().toISOString().substring(0,10);
-  const semana=new Date(Date.now()-7*86400000).toISOString().substring(0,10);
-  const mes=new Date(Date.now()-30*86400000).toISOString().substring(0,10);
-
-  let html=`<div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center">
-    <select id="fil-parque" onchange="renderPanel()" style="padding:8px 12px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px">
-      <option value="">Todos los parques</option>
-      ${Object.keys(PRESUPUESTO).map(k=>`<option value="${PRESUPUESTO[k].nombre}" ${filP===PRESUPUESTO[k].nombre?'selected':''}>${PRESUPUESTO[k].nombre}</option>`).join('')}
-    </select>
-    <select id="fil-fecha" onchange="renderPanel()" style="padding:8px 12px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px">
-      <option value="hoy" ${filF==='hoy'?'selected':''}>Hoy</option>
-      <option value="semana" ${filF==='semana'?'selected':''}>Últimos 7 días</option>
-      <option value="mes" ${filF==='mes'?'selected':''}>Últimos 30 días</option>
-      <option value="todo" ${filF==='todo'?'selected':''}>Todo el período</option>
-      <option value="rango" ${filF==='rango'?'selected':''}>Rango personalizado</option>
-    </select>
-    ${filF==='rango'?`
-    <input type="date" id="fil-fecha-ini" value="${filFI}" onchange="renderPanel()" style="padding:8px 12px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px">
-    <span style="font-size:13px;color:#666">al</span>
-    <input type="date" id="fil-fecha-fin" value="${filFF}" onchange="renderPanel()" style="padding:8px 12px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px">
-    `:''}
-  </div>`;
-
-  let regs=[...registrosData].reverse().filter(r=>{
-    if(filP&&r.parque!==filP) return false;
-    if(!r.fecha) return true;
-    if(filF==='hoy') return r.fecha===hoy;
-    if(filF==='semana') return r.fecha>=semana;
-    if(filF==='mes') return r.fecha>=mes;
-    if(filF==='rango') return (!filFI||r.fecha>=filFI)&&(!filFF||r.fecha<=filFF);
-    return true;
-  });
-
-  if(!regs.length){
-    html+='<div class="loading" style="padding:40px">No hay registros aún.</div>';
-    return html;
+function renderTransferencias(transferencias){
+  if(!transferencias.length){
+    return`<div class="card"><div class="empty">No hay transferencias de rubros entre parques registradas.</div></div>`;
   }
+  let html=`<div class="transfer-summary">
+    <strong>↔ ${transferencias.length} transferencia(s) registrada(s)</strong> — Rubros ejecutados en un parque diferente al del contrato original.
+  </div>
+  <div class="card"><div class="card-title">Detalle de transferencias</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Fecha</th><th>Residente</th><th>Rubro</th><th>Und.</th><th class="td-right">Cantidad</th><th>Parque contrato</th><th>Parque ejecución</th><th>Motivo</th></tr></thead>
+    <tbody>`;
+  transferencias.forEach(t=>{
+    html+=`<tr class="tr-row">
+      <td style="font-size:11px">${t.fecha||''}</td>
+      <td style="font-size:11px">${t.residente||''}</td>
+      <td style="font-size:11px">${t.rubro}</td>
+      <td class="td-center"><span style="background:#FFF3CD;padding:2px 5px;border-radius:4px;font-size:10px">${t.unidad}</span></td>
+      <td class="td-right" style="font-weight:600;color:#92400E">${fmtN(t.cantidad)}</td>
+      <td><span class="badge ${PBADGE[t.pkOrigen]||''}">${t.parqueOrigen}</span></td>
+      <td><span class="badge ${PBADGE[t.pkEjec]||''}">${t.parqueEjec}</span></td>
+      <td style="font-size:11px;color:#666">${t.motivo||'Sin motivo registrado'}</td>
+    </tr>`;
+  });
+  html+='</tbody></table></div></div>';
+  return html;
+}
 
+function renderRegistros(){
+  const filP=document.getElementById('fil-parque-r')?document.getElementById('fil-parque-r').value:'';
+  let regs=[...registrosData].reverse().filter(r=>!filP||norm(r.parque)===norm(PRESUPUESTO[filP]?PRESUPUESTO[filP].nombre:''));
+  let html=`<div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+    <select id="fil-parque-r" onchange="renderPanel()" style="padding:8px 12px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px">
+      <option value="">Todos los parques</option>
+      ${Object.keys(PRESUPUESTO).map(k=>`<option value="${k}" ${filP===k?'selected':''}>${PRESUPUESTO[k].nombre}</option>`).join('')}
+    </select>
+  </div>`;
+  if(!regs.length){html+='<div class="empty">No hay registros.</div>';return html;}
   regs.forEach(r=>{
-    const pk=Object.keys(PRESUPUESTO).find(k=>PRESUPUESTO[k].nombre===r.parque)||'metro';
+    const pk=Object.keys(PRESUPUESTO).find(k=>norm(PRESUPUESTO[k].nombre)===norm(r.parque))||'metro';
     const p=PRESUPUESTO[pk];
-    const ri=p.rubros.findIndex(rb=>rb.desc===r.rubro);
-    const vu=ri>=0?p.rubros[ri].vu:0;
-    const valEj=(parseFloat(r.cantidad)||0)*vu;
-    html+=`<div class="reg-item">
-      <div class="reg-head">
+    const esTransf=r.esTransferido==='1'||r.esTransferido===true||r.esTransferido==='true';
+    html+=`<div style="background:#fff;border-radius:10px;border:1px solid #e0e0e0;padding:12px 14px;margin-bottom:8px;${esTransf?'border-left:3px solid #F59E0B':''}">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:6px">
         <div>
-          <span class="badge badge-${pk}" style="background:${p.bg};color:${p.txt}">${r.parque}</span>
-          <span style="font-size:11px;color:#666;margin-left:6px">${r.residente}</span>
-          <div class="reg-meta">${r.fecha} — ${r.fechaHora||''}</div>
+          <span class="badge ${PBADGE[pk]}" style="background:${p.bg};color:${p.txt}">${r.parque}</span>
+          ${esTransf?`<span class="badge b-transfer">↔ Desde ${r.parqueOrigen}</span>`:''}
+          <span style="font-size:11px;color:#999;margin-left:6px">${r.residente} · ${r.fecha}</span>
         </div>
-        ${valEj>0?`<span style="font-weight:600;color:#639922;font-size:13px">${fmt(valEj)}</span>`:''}
       </div>
-      <div class="reg-rubro">${r.rubro}</div>
-      <div class="reg-cant">${fmtN(parseFloat(r.cantidad)||0)} ${ri>=0?p.rubros[ri].unidad:''} ejecutados${vu>0?' · '+fmt(vu)+'/und':''}</div>
-      ${r.obs?`<div class="reg-obs">${r.obs}</div>`:''}
-      ${r.fotos&&r.fotos!=='Sin fotos'?`<div style="font-size:11px;color:#1a5f9e;margin-top:4px">📷 ${r.fotos}</div>`:''}
+      <div style="font-size:13px;color:#1a1a1a">${r.rubro}</div>
+      <div style="font-size:14px;font-weight:600;color:#1a5f9e;margin-top:2px">${fmtN(parseFloat(r.cantidad||0))} ${r.unidad||''} ejecutados</div>
+      ${r.obs?`<div style="font-size:11px;color:#666;font-style:italic;margin-top:4px">${r.obs}</div>`:''}
+      ${esTransf&&r.motivo?`<div style="font-size:11px;color:#92400E;background:#FFF3CD;padding:3px 8px;border-radius:4px;margin-top:4px">📋 ${r.motivo}</div>`:''}
     </div>`;
   });
   return html;
 }
 
-function setTab(t){ tabActual=t; renderPanel(); }
-function verDetalle(pk){ parqueActivo=pk; tabActual='detalle'; renderPanel(); }
-function cambiarParque(pk){ parqueActivo=pk; renderPanel(); }
-function abrirLb(src){ $('lb-img').src=src; $('lightbox').classList.add('open'); }
-function cerrarLb(){ $('lightbox').classList.remove('open'); }
+function setTab(t){tabActual=t;renderPanel();}
+function verContrato(pk){parqueActivo=pk;tabActual='contrato';renderPanel();}
+function cambiarParque(pk,tab){parqueActivo=pk;tabActual=tab;renderPanel();}
+function cerrarLb(){document.getElementById('lightbox').classList.remove('open');}
 
 cargarDatos();
-setInterval(cargarDatos, 120000);
+setInterval(cargarDatos,120000);
 </script>
 </body>
 </html>
