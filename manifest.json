@@ -2,24 +2,14 @@
   "name": "Avance de Obra — Parques Fase 1",
   "short_name": "Avance Obra",
   "description": "Registro de avance diario de obra - Mantenimiento de Parques Fase 1",
-  "start_url": "/",
+  "start_url": "/avance-parques/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#1a5f9e",
   "theme_color": "#1a5f9e",
   "lang": "es",
   "icons": [
-    {
-      "src": "icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
+    {"src": "icons/icon-192.png","sizes": "192x192","type": "image/png","purpose": "any maskable"},
+    {"src": "icons/icon-512.png","sizes": "512x512","type": "image/png","purpose": "any maskable"}
   ]
 }
