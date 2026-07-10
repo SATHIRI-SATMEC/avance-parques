@@ -352,9 +352,32 @@ function renderCharts(contrato){
   if(charts.barras)charts.barras.destroy();
   if(charts.dona)charts.dona.destroy();
   const cb=document.getElementById('chart-barras');
-  if(cb)charts.barras=new Chart(cb,{type:'bar',data:{labels,datasets:[{label:'Presupuesto',data:presups,backgroundColor:'rgba(26,95,158,0.15)',borderColor:'rgba(26,95,158,0.5)',borderWidth:1},{label:'Ejecutado',data:ejecs,backgroundColor:colors.map(c=>c+'CC'),borderColor:colors,borderWidth:1}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{y:{ticks:{callback:v=>'$'+v.toLocaleString()}}}})});
+  if(cb)charts.barras=new Chart(cb,{
+    type:'bar',
+    data:{labels:labels,datasets:[
+      {label:'Presupuesto',data:presups,backgroundColor:'rgba(26,95,158,0.15)',borderColor:'rgba(26,95,158,0.5)',borderWidth:1},
+      {label:'Ejecutado',data:ejecs,backgroundColor:colors,borderColor:colors,borderWidth:1}
+    ]},
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom'}},
+      scales:{y:{ticks:{callback:function(v){return '$'+v.toLocaleString();}}}}
+    }
+  });
   const cd=document.getElementById('chart-dona');
-  if(cd)charts.dona=new Chart(cd,{type:'doughnut',data:{labels,datasets:[{data:ejecs,backgroundColor:colors,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:ctx=>' '+ctx.label+': '+fmt(ctx.raw)}}}})});
+  if(cd)charts.dona=new Chart(cd,{
+    type:'doughnut',
+    data:{labels:labels,datasets:[{data:ejecs,backgroundColor:colors,borderWidth:2}]},
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'bottom'},
+        tooltip:{callbacks:{label:function(ctx){return ' '+ctx.label+': '+fmt(ctx.raw);}}}
+      }
+    }
+  });
 }
 
 function renderVistaContrato(contrato){
