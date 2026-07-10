@@ -208,7 +208,7 @@ function cargarDatos(){
   };
   sc.onerror=function(){try{document.head.removeChild(sc);}catch(e){}delete window[cbN];usarDatosVacios();};
   document.head.appendChild(sc);
-  setTimeout(()=>{if(window[cbN]){try{document.head.removeChild(sc);}catch(e){}delete window[cbN];usarDatosVacios();}},8000);
+  setTimeout(()=>{if(window[cbN]){try{document.head.removeChild(sc);}catch(e){}delete window[cbN];usarDatosVacios();}},25000);
 }
 
 function usarDatosVacios(){
